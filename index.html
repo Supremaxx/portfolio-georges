@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Georges TOULIS | Portfolio Expert SISR</title>
+    <style>
+        :root {
+            --primary: #3b82f6;       /* Bleu Royal */
+            --primary-dark: #1d4ed8;  
+            --accent: #06b6d4;        /* Cyan */
+            --bg-dark: #020617;       /* Fond noir */
+            --bg-card: #0f172a;       /* Fond cartes */
+            --text-main: #f8fafc;     
+            --text-muted: #94a3b8;    
+            --border: rgba(255,255,255,0.08);
+            --success: #10b981;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(2, 6, 23, 0.98);
+            padding: 1rem 2%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+        }
+
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 900;
+            color: var(--primary);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .nav-links { display: flex; gap: 1.2rem; }
+        .nav-links a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.8rem;
+            transition: 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .nav-links a:hover { color: var(--accent); }
+
+        /* --- HERO SECTION --- */
+        header {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 8rem 1rem;
+            position: relative;
+            background: linear-gradient(rgba(2, 6, 23, 0.85), rgba(2, 6, 23, 0.98)), url('hero-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .hero-content { position: relative; z-index: 2; max-width: 950px; }
+        
+        .hero-content h1 {
+            font-size: 3.8rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 10px 40px rgba(59, 130, 246, 0.2);
+        }
+
+        .hero-content h2 {
+            font-size: 1.5rem;
+            font-weight: 300;
+            color: #cbd5e1;
+            margin-bottom: 2rem;
+            letter-spacing: 2px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            margin: 0.5rem;
+            border: 1px solid var(--primary);
+            box-shadow: 0 0 25px rgba(59, 130, 246, 0.3);
+        }
+
+        .btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 40px rgba(59, 130, 246, 0.5);
+        }
+
+        .btn-outline {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.2);
+            backdrop-filter: blur(5px);
+            box-shadow: none;
+        }
+        .btn-outline:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* --- SECTIONS --- */
+        section {
+            padding: 6rem 8%;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 4rem;
+            color: white;
+            position: relative;
+            padding-left: 20px;
+            border-left: 6px solid var(--primary);
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 3rem;
+        }
+
+        .card {
+            background: var(--bg-card);
+            padding: 2.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            transition: transform 0.3s, border-color 0.3s;
+            height: 100%;
+        }
+
+        .card:hover {
+            transform: translateY(-7px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+
+        .card h3 {
+            color: var(--accent);
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        /* --- LISTES ET ALIGNEMENTS (CORRIGÉ) --- */
+        .tech-block { margin-bottom: 2rem; }
+        .tech-list { list-style: none; padding: 0; }
+        
+        /* Correction de l'alignement flex pour les puces */
+        .tech-list li {
+            margin-bottom: 1rem;
+            color: #cbd5e1;
+            font-size: 0.95rem;
+            display: flex; /* Flexbox pour aligner flèche et texte */
+            align-items: flex-start; /* Aligner en haut */
+        }
+
+        .tech-list li::before {
+            content: "➜";
+            color: var(--primary);
+            font-size: 0.9rem;
+            margin-right: 12px;
+            flex-shrink: 0; /* Empêche la flèche de s'écraser */
+            margin-top: 5px; /* Ajustement fin pour l'alignement avec le texte */
+        }
+
+        .tech-list strong { color: white; display: block; margin-bottom: 0.3rem; font-size: 1rem; }
+
+        .best-practices {
+            background: rgba(16, 185, 129, 0.05);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1.5rem;
+        }
+        .best-practices h4 {
+            color: var(--success);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+        .best-practices ul { list-style: none; padding: 0; }
+        .best-practices li {
+            font-size: 0.9rem;
+            color: #cbd5e1;
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 0.5rem;
+        }
+        .best-practices li::before {
+            content: "✅";
+            margin-right: 8px;
+            font-size: 0.8rem;
+            flex-shrink: 0;
+            margin-top: 4px;
+        }
+
+        .tag {
+            display: inline-block;
+            background: rgba(6, 182, 212, 0.1);
+            color: var(--accent);
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-right: 6px;
+            margin-top: 10px;
+            border: 1px solid rgba(6, 182, 212, 0.2);
+        }
+
+        /* --- A5 ANALYSE --- */
+        .company-analysis {
+            background: linear-gradient(145deg, #1e293b, #0f172a);
+            border-radius: 15px;
+            padding: 3rem;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            margin-bottom: 4rem;
+        }
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        .stat-box {
+            background: rgba(255,255,255,0.05);
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .stat-value { font-size: 1.4rem; font-weight: bold; color: white; display: block; margin-bottom: 0.5rem; }
+
+        /* --- PROFIL PERSONNEL --- */
+        .profile-container {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 4rem;
+            background: var(--bg-card);
+            padding: 3rem;
+            border-radius: 15px;
+            border: 1px solid var(--border);
+        }
+        .profile-sidebar {
+            border-right: 1px solid var(--border);
+            padding-right: 2rem;
+        }
+        .profile-content h3 { color: var(--primary); margin-bottom: 1rem; text-transform: uppercase; font-size: 1.1rem; }
+        .lang-item { display: flex; justify-content: space-between; margin-bottom: 0.5rem; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 0.5rem; }
+        
+        /* --- TIMELINE EXPERIENCE --- */
+        .mission-card {
+            background: var(--bg-card);
+            border-left: 5px solid var(--primary);
+            padding: 2.5rem;
+            margin-bottom: 2.5rem;
+            border-radius: 0 12px 12px 0;
+            position: relative;
+        }
+        .mission-tools {
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        /* --- CV COMPLET --- */
+        .cv-container {
+            background: white; /* Fond blanc papier */
+            color: #1e293b; /* Texte foncé pour lisibilité */
+            padding: 4rem;
+            border-radius: 5px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        
+        .cv-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-bottom: 3px solid #2563eb;
+            padding-bottom: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .cv-section {
+            margin-bottom: 2rem;
+        }
+
+        .cv-title {
+            color: #2563eb;
+            text-transform: uppercase;
+            font-weight: 800;
+            font-size: 1.1rem;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .cv-item {
+            margin-bottom: 1.2rem;
+        }
+
+        .cv-item h4 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        .cv-meta {
+            font-style: italic;
+            color: #64748b;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .cv-list {
+            padding-left: 1.2rem;
+            font-size: 0.95rem;
+            color: #334155;
+        }
+        .cv-list li { margin-bottom: 0.3rem; }
+
+        /* RESPONSIVE */
+        @media (max-width: 900px) {
+            .nav-links { display: none; }
+            .grid-container, .profile-container { grid-template-columns: 1fr; }
+            .profile-sidebar { border-right: none; border-bottom: 1px solid var(--border); padding-bottom: 2rem; margin-bottom: 2rem; }
+            .hero-content h1 { font-size: 2.8rem; }
+            .cv-header-row { flex-direction: column; gap: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">GT. SISR</div>
+        <div class="nav-links">
+            <a href="#tableau">Synthèse E4</a>
+            <a href="#competences">Compétences</a>
+            <a href="#a5-analysis">Analyse A5</a>
+            <a href="#experience">Parcours Pro</a>
+            <a href="#projets">Projets</a>
+            <a href="#leadership">Leadership</a>
+            <a href="#profil">Mon Profil</a>
+            <a href="#cv">Mon CV</a>
+        </div>
+    </nav>
+
+    <header>
+        <div class="hero-content">
+            <h1>Georges TOULIS</h1>
+            <h2>ADMINISTRATEUR SYSTÈMES & RÉSEAUX</h2>
+            <p style="margin: 0 auto 2.5rem auto; max-width: 800px; color: #cbd5e1; font-size: 1.15rem;">
+                Technicien Supérieur en alternance chez <strong>A5 Numérique</strong>.
+                <br>J'accompagne la transformation numérique des PME par le déploiement d'infrastructures sécurisées, de la VoIP au Cloud.
+                <br><span style="color: var(--accent); font-weight: bold; margin-top: 1rem; display: block;">DISCIPLINE • TECHNIQUE • SERVICE</span>
+            </p>
+            <div>
+                <a href="#tableau" class="btn">Voir ma Matrice E4</a>
+                <a href="mon_cv.pdf" target="_blank" class="btn btn-outline">📥 Télécharger CV (PDF)</a>
+            </div>
+        </div>
+    </header>
+
+    <section id="tableau">
+        <h2 class="section-title">Tableau de Synthèse (Épreuve E4)</h2>
+        <div style="max-width: 1000px; margin: 0 auto; text-align: center;">
+            <p style="margin-bottom: 2rem; color: #94a3b8; font-size: 1.1rem;">
+                Ce document officiel atteste de la couverture complète du référentiel BTS SIO (Bloc 1 et Option SISR) à travers mes différentes réalisations professionnelles et académiques.
+            </p>
+            <div class="tableau-wrapper" style="background: white; padding: 10px; border-radius: 10px;">
+                <img src="tableau_synthese.png" alt="Tableau de Synthèse E4" style="width:100%; height:auto;">
+            </div>
+        </div>
+    </section>
+
+    <section id="competences">
+        <h2 class="section-title">Expertise Technique & Bonnes Pratiques</h2>
+        <div class="grid-container">
+            
+            <div class="card">
+                <h3>📡 Infrastructure & Réseaux</h3>
+                <div class="tech-block">
+                    <ul class="tech-list">
+                        <li>
+                            <div><strong>Architecture L2/L3 (Switching/Routing)</strong>
+                            Maîtrise de la CLI Cisco/Netgear. Segmentation logique par VLANs (802.1Q) pour réduire les domaines de diffusion. Routage inter-VLAN.</div>
+                        </li>
+                        <li>
+                            <div><strong>Réseaux Sans-Fil (WLAN Ubiquiti)</strong>
+                            Étude de couverture (Site Survey). Déploiement de bornes Unifi. Sécurisation WPA3. Isolation des flux "Invités" (Guest VLAN).</div>
+                        </li>
+                        <li>
+                            <div><strong>Sécurité Périmétrique (Firewalling)</strong>
+                            Administration pfSense. Création de règles de filtrage (ACL) avec granularité fine. Mise en place de VPN IPsec Site-à-Site.</div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="best-practices">
+                    <h4>✅ Bonnes Pratiques Appliquées</h4>
+                    <ul>
+                        <li>Principe du moindre privilège (Zero Trust).</li>
+                        <li>Documentation des architectures réseaux (Visio/Draw.io).</li>
+                        <li>Redondance des liens critiques (LACP).</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>💻 Administration Systèmes</h3>
+                <div class="tech-block">
+                    <ul class="tech-list">
+                        <li>
+                            <div><strong>Windows Server (AD DS)</strong>
+                            Gestion centralisée des identités. Structure hiérarchique (Forêt/Domaine/UO). Durcissement par GPO (Stratégies de groupe).</div>
+                        </li>
+                        <li>
+                            <div><strong>Services Réseaux Critiques</strong>
+                            DNS (Zones, Enregistrements A/CNAME). DHCP (Scopes, Réservations, Failover pour haute disponibilité).</div>
+                        </li>
+                        <li>
+                            <div><strong>Open Source & Linux</strong>
+                            Administration Debian/Ubuntu en CLI. Sécurisation SSH (Clés RSA 4096 bits, Fail2Ban). Hébergement Web (Apache).</div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="best-practices">
+                    <h4>✅ Bonnes Pratiques Appliquées</h4>
+                    <ul>
+                        <li>Nomenclature de nommage stricte (Ex: SRV-AD-01).</li>
+                        <li>Séparation des rôles serveurs.</li>
+                        <li>Politique de sauvegarde 3-2-1.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>📞 Téléphonie sur IP (VoIP)</h3>
+                <div class="tech-block">
+                    <ul class="tech-list">
+                        <li>
+                            <div><strong>Protocole SIP & Flux RTP</strong>
+                            Compréhension du handshake SIP. Analyse de trames (Wireshark) pour diagnostic des erreurs 4xx/5xx.</div>
+                        </li>
+                        <li>
+                            <div><strong>Provisioning & Matériel</strong>
+                            Déploiement industriel de postes Yealink. Utilisation de serveurs de provisioning (RPS) pour configuration "Zero Touch".</div>
+                        </li>
+                        <li>
+                            <div><strong>Centre d'Appels & Flux</strong>
+                            Configuration OVH Manager : SVI (Serveur Vocal Interactif), Files d'attente (ACD), Groupes d'appels.</div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="best-practices">
+                    <h4>✅ Bonnes Pratiques Appliquées</h4>
+                    <ul>
+                        <li>Ségrégation VLAN Voix (Voice VLAN) pour la QoS.</li>
+                        <li>Sécurisation des comptes SIP (Mots de passe forts).</li>
+                        <li>Plan de reprise en cas de panne (Redirection GSM).</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="a5-analysis" style="background: rgba(15, 23, 42, 0.6);">
+        <h2 class="section-title">Analyse du Contexte : A5 Numérique</h2>
+        
+        <div class="company-analysis">
+            <div style="display:flex; justify-content:space-between; align-items:flex-end; border-bottom:1px solid rgba(255,255,255,0.1); padding-bottom:1.5rem; margin-bottom:2rem; flex-wrap:wrap;">
+                <div>
+                    <h3 style="color:white; font-size:2.2rem; margin-bottom:0.5rem; border:none;">A5 NUMÉRIQUE</h3>
+                    <p style="color:var(--accent); font-weight:bold;">Guichet Unique de la Transformation Digitale</p>
+                </div>
+                <div style="text-align:right; color:#94a3b8; font-size:0.95rem;">
+                    <p>Statut : <strong>SAS</strong> | Création : <strong>2009</strong></p>
+                    <p>Siège : <strong>Saint-Denis (93)</strong></p>
+                    <p>Cible : <strong>B2B</strong> (PME/Grands Comptes) & <strong>B2C</strong></p>
+                </div>
+            </div>
+
+            <p style="font-size: 1.15rem; margin-bottom: 2rem;">
+                A5 Numérique se distingue par son approche <strong>"Guichet Unique"</strong>. L'objectif est de simplifier la vie des entreprises en étant leur interlocuteur unique pour l'ensemble de la chaîne technologique. L'entreprise fonde sa réputation sur la <strong>réactivité</strong>, le <strong>conseil personnalisé</strong> et une forte <strong>culture du service</strong>.
+            </p>
+
+            <div class="grid-container">
+                <div>
+                    <strong style="color:var(--primary); font-size:1.1rem; display:block; margin-bottom:1rem;">1. Pôle Télécom & Mobilité</strong>
+                    <ul class="tech-list">
+                        <li><strong>VoIP Centrex :</strong> Solutions de téléphonie hébergée flexibles.</li>
+                        <li><strong>Opérateur Mobile :</strong> Vente de forfaits 4G/5G (Data/Voix) pour flottes (B2B) et particuliers (B2C).</li>
+                        <li><strong>Studio d'Enregistrement :</strong> Service exclusif de création de messages d'accueil et attentes téléphoniques professionnelles.</li>
+                    </ul>
+                </div>
+                <div>
+                    <strong style="color:var(--primary); font-size:1.1rem; display:block; margin-bottom:1rem;">2. Pôle Hardware & Infra</strong>
+                    <ul class="tech-list">
+                        <li><strong>Négoce Matériel :</strong> Vente et conseil (PC Portables, Smartphones, Serveurs, Équipements Réseaux).</li>
+                        <li><strong>A5 Sécurité :</strong> Solutions complètes de Vidéoprotection (NVR, Caméras IP) et Alarmes.</li>
+                        <li><strong>Bureautique :</strong> Solutions d'impression managées (Partenariat Canon).</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="stat-grid">
+                <div class="stat-box">
+                    <span class="stat-value">OVH Cloud</span>
+                    <span class="stat-label">Partenaire Infrastructure Télécom</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-value">CANON</span>
+                    <span class="stat-label">Partenaire Solutions d'Impression</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-value">360°</span>
+                    <span class="stat-label">Couverture des besoins IT</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience">
+        <h2 class="section-title">Missions Professionnelles (A5 Numérique)</h2>
+
+        <div class="mission-card">
+            <h3>📞 Pôle Téléphonie IP (Cœur de métier)</h3>
+            <p style="margin-bottom: 1.5rem; color: #cbd5e1;">Responsable du déploiement technique et de la maintenance des parcs clients.</p>
+            <ul class="tech-list">
+                <li>
+                    <div><strong>Déploiement & Provisioning :</strong> Pré-configuration en atelier (Staging). Injection des paramètres SIP via adresse MAC sur serveurs RPS. Installation sur site.</div>
+                </li>
+                <li>
+                    <div><strong>Gestion de Parc (Run) :</strong> Administration quotidienne via OVH Manager. Création/Suppression de lignes, modification des routages d'appels.</div>
+                </li>
+                <li>
+                    <div><strong>Support Expert N2 :</strong> Diagnostic des incidents critiques (Coupures, Hachures). Analyse de la gigue et de la latence.</div>
+                </li>
+            </ul>
+            <div class="mission-tools">
+                <strong>Outils :</strong> OVH Manager, Yealink RPS, Wireshark, Softphones.
+            </div>
+        </div>
+
+        <div class="mission-card" style="border-left-color: var(--accent);">
+            <h3>📡 Pôle Infrastructure & Réseaux</h3>
+            <p style="margin-bottom: 1.5rem; color: #cbd5e1;">Garantir la connectivité et la performance du socle technique chez le client.</p>
+            <ul class="tech-list">
+                <li>
+                    <div><strong>Installation Physique :</strong> Pose de baies de brassage, câblage structuré (RJ45), installation d'Onduleurs et Routeurs.</div>
+                </li>
+                <li>
+                    <div><strong>Switching & Power :</strong> Configuration de Switchs Netgear PoE pour l'alimentation électrique des téléphones et bornes Wi-Fi.</div>
+                </li>
+                <li>
+                    <div><strong>Wi-Fi Managé :</strong> Configuration de l'écosystème Unifi. Séparation logique (VLAN) des flux "Interne" et "Visiteurs".</div>
+                </li>
+            </ul>
+            <div class="mission-tools">
+                <strong>Outils :</strong> Unifi Controller (Cloud Key), Netgear Insight, Testeurs de câbles.
+            </div>
+        </div>
+
+        <div class="mission-card" style="border-left-color: #10b981;">
+            <h3>🛠️ Pôle Support & Services Managés</h3>
+            <p style="margin-bottom: 1.5rem; color: #cbd5e1;">Maintien en condition opérationnelle (MCO) et assistance utilisateurs.</p>
+            <ul class="tech-list">
+                <li>
+                    <div><strong>Environnement Utilisateur :</strong> Préparation (Masterisation) de postes de travail. Déploiement Office 365, Teams, Outlook. Migration de données.</div>
+                </li>
+                <li>
+                    <div><strong>Solutions d'Impression :</strong> Installation de copieurs Canon. Paramétrage réseau et flux Scan-to-Mail (Relais SMTP Authentifié).</div>
+                </li>
+                <li>
+                    <div><strong>Helpdesk :</strong> Gestion des tickets d'incidents. Prise en main à distance (AnyDesk) pour résolution rapide.</div>
+                </li>
+            </ul>
+            <div class="mission-tools">
+                <strong>Outils :</strong> AnyDesk, TeamViewer, Outils de ticketing.
+            </div>
+        </div>
+    </section>
+
+    <section id="projets">
+        <h2 class="section-title">Projets & Labs (SITKA / Stadium)</h2>
+        
+        <div class="grid-container">
+            <div class="card">
+                <h3>🏢 Projet Stadium Company (PPE)</h3>
+                <p style="font-style: italic; color: #94a3b8; margin-bottom: 1rem;">
+                    Contexte : Modernisation de l'infrastructure d'un stade accueillant du public.
+                </p>
+                <strong style="color:var(--primary); display:block; margin-bottom:0.5rem;">Défis & Enjeux :</strong>
+                <p style="font-size:0.9rem; margin-bottom:1rem; color:#cbd5e1;">Gérer une forte densité d'utilisateurs et sécuriser les données critiques.</p>
+                
+                <ul class="tech-list">
+                    <li>
+                        <div><strong>Architecture Réseau :</strong> Plan d'adressage VLSM pour optimiser les IPs. Segmentation VLAN stricte.</div>
+                    </li>
+                    <li>
+                        <div><strong>Haute Disponibilité :</strong> Configuration DHCP Failover et redondance DNS.</div>
+                    </li>
+                    <li>
+                        <div><strong>Télétravail :</strong> Mise en place d'un VPN RRAS (Routing and Remote Access).</div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="card">
+                <h3>🧪 Laboratoire SITKA (R&D)</h3>
+                <p style="font-style: italic; color: #94a3b8; margin-bottom: 1rem;">
+                    Contexte : Simulation d'entreprise pour l'intégration de services Open Source.
+                </p>
+                <strong style="color:var(--primary); display:block; margin-bottom:0.5rem;">Défis & Enjeux :</strong>
+                <p style="font-size:0.9rem; margin-bottom:1rem; color:#cbd5e1;">Maîtriser la chaîne complète : Firewalling, Web et Messagerie sous Linux.</p>
+
+                <ul class="tech-list">
+                    <li>
+                        <div><strong>Sécurité (pfSense) :</strong> Filtrage de paquets, Portail Captif couplé au LDAP, NAT/PAT.</div>
+                    </li>
+                    <li>
+                        <div><strong>Services Web :</strong> Serveur Apache Intranet + Proxy SquidGuard (Filtrage URL).</div>
+                    </li>
+                    <li>
+                        <div><strong>Collaboration :</strong> Serveur Zimbra (Mail/Calendrier) administré en CLI.</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="leadership">
+        <h2 class="section-title">Leadership & Veille Stratégique</h2>
+        
+        <div class="grid-container">
+            
+            <div class="card" style="border-top: 5px solid var(--primary);">
+                <h3>👮 Leadership & Gestion de Communauté</h3>
+                <p style="margin-bottom: 1.5rem;">
+                    Responsable au sein d'une plateforme de simulation de procédures (Roleplay) de <strong>+100 membres</strong>.
+                </p>
+                <ul class="tech-list">
+                    <li>
+                        <div><strong>Management (25 personnes) :</strong> Assistant Commanding Officer. Gestion opérationnelle des équipes.</div>
+                    </li>
+                    <li>
+                        <div><strong>Process (SOP) :</strong> Rédaction de procédures standardisées (Standard Operating Procedures).</div>
+                    </li>
+                    <li>
+                        <div><strong>RH & Formation :</strong> Recrutement, évaluation des compétences et gestion de carrière des membres.</div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="card" style="border-top: 5px solid var(--accent);">
+                <h3>📡 Veille Technologique (E6)</h3>
+                <p style="color: white; font-weight: bold; margin-bottom: 1rem;">Sujet : "La fin du RTC et la bascule vers le Tout IP"</p>
+                
+                <div style="background: rgba(255,255,255,0.05); padding: 1rem; border-radius: 8px; margin-bottom: 1.5rem;">
+                    <strong style="color:var(--accent)">Analyse Économique (TCO/ROI) :</strong>
+                    <ul style="list-style:none; padding:0; margin-top:0.5rem; font-size:0.9rem; color:#cbd5e1;">
+                        <li style="margin-bottom:0.8rem; display:flex;">
+                            <span style="margin-right:8px;">✅</span> <strong>CAPEX vs OPEX :</strong> Le Cloud (Centrex) transforme l'investissement matériel lourd (PABX) en charges d'exploitation flexibles.
+                        </li>
+                        <li style="display:flex;">
+                            <span style="margin-right:8px;">✅</span> <strong>Réduction du TCO :</strong> La VoIP réduit le "Coût Total de Possession" (Maintenance, Facture opérateur).
+                        </li>
+                    </ul>
+                </div>
+
+                <div style="margin-bottom: 1rem;">
+                    <strong style="color:var(--accent)">Méthodologie :</strong>
+                    <ul class="tech-list" style="margin-top: 0.5rem;">
+                        <li>
+                            <div><strong>Cycle :</strong> Collecte (Feedly) ➜ Analyse (Impact Client) ➜ Synthèse.</div>
+                        </li>
+                        <li>
+                            <div><strong>Statistiques :</strong> Fermeture du RTC par plaques géographiques (Orange) actée.</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="profil" style="background: var(--bg-card);">
+        <h2 class="section-title">Profil Personnel & Intérêts</h2>
+        
+        <div class="profile-container">
+            <div class="profile-sidebar">
+                <div style="text-align: center; margin-bottom: 2rem;">
+                    <div style="width: 100px; height: 100px; background: var(--primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; font-weight: bold; margin: 0 auto 1rem auto;">GT</div>
+                    <h3 style="color: white; margin-bottom: 0.5rem;">Georges TOULIS</h3>
+                    <p style="color: var(--accent); font-size: 0.9rem;">Technicien SISR</p>
+                </div>
+                
+                <div class="profile-content">
+                    <h3>🗣️ Langues</h3>
+                    <div class="lang-item"><span>Français</span> <span style="color:#cbd5e1;">Natif</span></div>
+                    <div class="lang-item"><span>Grec</span> <span style="color:#cbd5e1;">Courant</span></div>
+                    <div class="lang-item"><span>Albanais</span> <span style="color:#cbd5e1;">Courant</span></div>
+                    <div class="lang-item"><span>Anglais</span> <span style="color:#cbd5e1;">Technique (B2)</span></div>
+                    <div class="lang-item"><span>Espagnol</span> <span style="color:#cbd5e1;">Scolaire</span></div>
+                </div>
+            </div>
+
+            <div class="profile-main">
+                <div style="margin-bottom: 2.5rem;">
+                    <h3 style="color: var(--primary); text-transform: uppercase; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; margin-bottom: 1rem;">🎖️ Engagement & Passions</h3>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                        <div>
+                            <strong style="color: white; display: block; margin-bottom: 0.5rem;">Histoire & Stratégie Militaire</strong>
+                            <p style="color: #cbd5e1; font-size: 0.95rem;">
+                                Passionné par la géopolitique et l'histoire militaire. Je m'inspire de la rigueur, de la discipline et de la gestion hiérarchique de ces domaines pour structurer mon travail technique et mes projets.
+                            </p>
+                        </div>
+                        <div>
+                            <strong style="color: white; display: block; margin-bottom: 0.5rem;">Hardware & Tech</strong>
+                            <p style="color: #cbd5e1; font-size: 0.95rem;">
+                                Montage et optimisation de PC (Gaming/Workstation). Veille active sur les composants (CPU/GPU) et le dépannage électronique.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 2.5rem;">
+                    <h3 style="color: var(--primary); text-transform: uppercase; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; margin-bottom: 1rem;">🏀 Sports & Collectif</h3>
+                    <p style="color: #cbd5e1;">
+                        Pratique régulière de sports collectifs (<strong>Handball, Basket</strong>) et de combat (<strong>Judo</strong>). Ces activités renforcent mon esprit d'équipe, ma gestion du stress et ma persévérance face aux défis.
+                    </p>
+                </div>
+
+                <div>
+                    <h3 style="color: var(--primary); text-transform: uppercase; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; margin-bottom: 1rem;">🌍 Voyages</h3>
+                    <p style="color: #cbd5e1;">
+                        Voyages marquants (notamment <strong>USA - San Francisco</strong>, Silicon Valley) favorisant l'ouverture d'esprit et la curiosité technologique.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="cv" style="background: #e2e8f0;">
+        <h2 class="section-title" style="color: #0f172a; border-left-color: #0f172a;">Curriculum Vitae</h2>
+        
+        <div class="cv-container">
+            <div style="text-align: center; margin-bottom: 3rem;">
+                <a href="mon_cv.pdf" target="_blank" class="btn">📥 Télécharger le CV Original (PDF)</a>
+            </div>
+
+            <div class="cv-header-row">
+                <div>
+                    <h2 style="font-size: 2.5rem; color: #0f172a;">Georges TOULIS</h2>
+                    <p style="font-size: 1.2rem; color: #334155; font-weight: bold;">Technicien Supérieur SIO (Option SISR)</p>
+                    <p style="color: #64748b; margin-top:0.5rem;">Permis B | 21 ans | Mobilité Île-de-France</p>
+                </div>
+                <div style="text-align: right; font-size:0.95rem;">
+                    <p>📧 georges.toulis.pro@gmail.com</p>
+                    <p>📱 06 01 86 21 55</p>
+                    <p>📍 Levallois-Perret / Paris</p>
+                    <p>🔗 <a href="#" style="color:#2563eb;">Mon Portfolio</a></p>
+                </div>
+            </div>
+
+            <div class="cv-section">
+                <h3 class="cv-title">Profil Professionnel</h3>
+                <p style="color: #334155; line-height: 1.6;">
+                    Technicien passionné et rigoureux, spécialisé dans les réseaux et la télécommunication. Actuellement en alternance, je développe une expertise forte en VoIP, administration système et cybersécurité. Doté d'un sens aigu du service et d'une discipline inspirée du monde militaire, je m'adapte rapidement aux environnements techniques exigeants.
+                </p>
+            </div>
+
+            <div class="cv-section">
+                <h3 class="cv-title">Expériences Professionnelles</h3>
+                
+                <div class="cv-item">
+                    <h4>Technicien Systèmes & Réseaux (Alternance)</h4>
+                    <p class="cv-meta">Depuis Septembre 2024 | A5 Numérique - Saint-Denis (93)</p>
+                    <ul class="cv-list">
+                        <li><strong>Téléphonie sur IP :</strong> Installation et maintenance de parcs (Yealink/OVH). Gestion des incidents N2/N3 (SIP/QoS).</li>
+                        <li><strong>Réseau :</strong> Déploiement d'architectures LAN/WLAN (Switchs Netgear, Bornes Unifi, VLANs).</li>
+                        <li><strong>Système :</strong> Administration Windows/Office 365, Masterisation de postes, Support utilisateurs.</li>
+                    </ul>
+                </div>
+
+                <div class="cv-item">
+                    <h4>Technicien Informatique (Stages)</h4>
+                    <p class="cv-meta">Mai-Juil 2023 & Oct-Déc 2023 | EDF - Nanterre & Saint-Denis</p>
+                    <ul class="cv-list">
+                        <li>Audit physique des infrastructures réseaux et cartographie des prises.</li>
+                        <li>Maintenance préventive et rédaction de rapports techniques.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="cv-section">
+                <h3 class="cv-title">Formation</h3>
+                <div class="cv-item">
+                    <h4>BTS SIO (Services Informatiques aux Organisations) - Option SISR</h4>
+                    <p class="cv-meta">2024 - 2026 | École IRIS (Groupe MediaSchool), Paris 17ème</p>
+                </div>
+                <div class="cv-item">
+                    <h4>Bac Pro Systèmes Numériques (Option RISC)</h4>
+                    <p class="cv-meta">2021 - 2024 | École IRIS, Paris 17ème - <span style="color: #16a34a; font-weight:bold;">Mention Bien</span></p>
+                </div>
+            </div>
+
+            <div class="cv-section">
+                <h3 class="cv-title">Compétences Techniques</h3>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                    <ul class="cv-list">
+                        <li><strong>Réseau :</strong> Cisco (CCNA 1), Netgear, Ubiquiti, VLAN, VPN, Firewalling (pfSense).</li>
+                        <li><strong>Système :</strong> Windows Server (AD, DNS, DHCP), Linux (Debian), Virtualisation (VMware).</li>
+                    </ul>
+                    <ul class="cv-list">
+                        <li><strong>Télécom :</strong> VoIP, SIP Trunk, Centrex, OVH Manager, Wireshark.</li>
+                        <li><strong>Outils :</strong> Packet Tracer, Putty, Office 365, Ticketing.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="cv-section">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+                    <div>
+                        <h3 class="cv-title">Langues</h3>
+                        <ul class="cv-list">
+                            <li><strong>Français :</strong> Langue maternelle</li>
+                            <li><strong>Grec :</strong> Bilingue</li>
+                            <li><strong>Albanais :</strong> Bilingue</li>
+                            <li><strong>Anglais :</strong> Technique (B2)</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="cv-title">Certifications</h3>
+                        <ul class="cv-list">
+                            <li>Cisco CCNA 1 (En cours)</li>
+                            <li>Certificat WordPress (OpenClassrooms)</li>
+                            <li>PSC1 (Premiers Secours)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer style="text-align: center; padding: 4rem; background: #000; color: #64748b; font-size: 0.9rem;">
+        <p>&copy; 2025 Georges TOULIS - Portfolio Professionnel BTS SIO</p>
+        <p>Développé en HTML5/CSS3 - Conforme aux exigences E4/E6</p>
+    </footer>
+
+</body>
+</html>
